@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.controlador import usuarios_controlador
 from app.modelo.usuarios_modelo import Usuario as usuario_modelo
+from flask_cors import cross_origin
 
 usuarios_blueprint = Blueprint('usuarios', __name__)
 
@@ -10,6 +11,7 @@ usuarios_blueprint = Blueprint('usuarios', __name__)
 @usuarios_blueprint.route('/usuarios/actualizar', methods=["PUT"])
 @usuarios_blueprint.route('/usuarios/agregar', methods=["POST"])
 @usuarios_blueprint.route('/usuarios/eliminar', methods=["DELETE"])
+@cross_origin()
 def managerUsuario(id_usuario = None):
     try:
         if id_usuario == None:
@@ -20,12 +22,9 @@ def managerUsuario(id_usuario = None):
                 return usuarios_controlador.eliminar_usuario(identificacion)
 
             usuario = usuario_modelo(
-                request.json['NombreCompleto'], 
-                request.json['CorreoElectronico'], 
                 request.json['Identificacion'], 
                 request.json['Contraseña'], 
-                request.json['Rol'],
-                request.json['Estado']
+                request.json['Rol']
             )
 
             if request.method == 'POST':
@@ -41,3 +40,14 @@ def managerUsuario(id_usuario = None):
     except Exception as e:
         return jsonify(status=False, msg=str(e))
 
+@usuarios_blueprint.route('/usuarios/login', methods=["POST"])
+@cross_origin()
+def loginUsuario():
+    try:
+        if request.method == 'POST':
+            usuarioID = str(request.json['Identificacion'])
+            password =  str(request.json['Contraseña'])
+            return usuarios_controlador.login_usuario(usuarioID, password)
+
+    except Exception as e:
+        return jsonify(status=False, msg=str(e))

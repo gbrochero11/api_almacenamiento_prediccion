@@ -47,12 +47,9 @@ def agregar_usuario(usuario):
 def actualizar_usuario(usuario):
     try:
         old_usuario = usuario_modelo.query.filter_by(Identificacion=usuario.Identificacion).first()
-        old_usuario.NombreCompleto = usuario.NombreCompleto
-        old_usuario.CorreoElectronico = usuario.CorreoElectronico
         old_usuario.Identificacion = usuario.Identificacion
         old_usuario.Contraseña = usuario.Contraseña
         old_usuario.Rol = usuario.Rol
-        old_usuario.Estado = usuario.Estado
         db.session.commit()
         return jsonify(status=True, msg='Se ha actualizado el usuario.')
     except Exception as e:
@@ -64,5 +61,19 @@ def eliminar_usuario(identificacion):
         old_usuario.Estado = 'desactivado'
         db.session.commit()
         return jsonify(status=True, msg='Se ha eliminado el usuario.')
+    except Exception as e:
+        return jsonify(status=False, msg=str(e))
+    
+def login_usuario(usuarioID, password):
+    try:
+        usuario = usuario_modelo.query.filter_by(Identificacion = usuarioID).first()
+
+        if usuario is None:
+            return jsonify(status=False, msg="Ningún usuario encontrado.")
+        if usuario.Contraseña != password:
+            print(usuario.Contraseña)
+            return jsonify(status=False, msg="Contraseña Incorrecta.")
+        
+        return jsonify(status=True, msg=usuario.obtenerDatos)
     except Exception as e:
         return jsonify(status=False, msg=str(e))
