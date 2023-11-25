@@ -22,20 +22,25 @@ def managerDatos(data_ID = None):
                 return datos_controlador.eliminar_dato(datoID) 
 
             datos = datos_modelo(
-                request.json["Name"],
+                request.json["Age"],
+                request.json["Gender"],
+                request.json["Item_Purchased"],
+                request.json["Category"],
+                request.json["Purchase_Amount"],
                 request.json["Location"],
-                request.json["Year"],
-                request.json["Kilometers_Driven"],
-                request.json["Fuel_Type"],
-                request.json["Transmission"],
-                request.json["Owner_Type"],
-                request.json["Mileage"],
-                request.json["Engine"],
-                request.json["Power"],
-                request.json["Seats"],
-                request.json["New_Price"],
-                request.json["Price"],
-                request.json["Estado"],
+                request.json["Size"],
+                request.json["Color"],
+                request.json["Season"],
+                request.json["Review_Rating"],
+                request.json["Subscription_Status"],
+                request.json["Payment_Method"],
+                request.json["Shipping_Type"],
+                request.json["Discount_Applied"],
+                request.json["Promo_Code_Used"],
+                request.json["Previous_Purchases"],
+                request.json["Preferred_Payment_Method"],
+                request.json["Frequency_of_Purchases"],
+                request.json["Estado"]
             )
 
             if request.method == 'POST':
