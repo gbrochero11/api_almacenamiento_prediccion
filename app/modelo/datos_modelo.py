@@ -16,6 +16,7 @@ class Datos(db.Model):
     Seats = db.Column(db.Numeric(10, 7))
     New_Price = db.Column(db.String(255))
     Price = db.Column(db.Numeric(10, 7))
+    Estado = db.Column(db.String(255))
 
     def __init__(
         self,
@@ -32,6 +33,7 @@ class Datos(db.Model):
         Seats,
         New_Price,
         Price,
+        estado
     ):
         self.Name = Name
         self.Location = Location
@@ -46,6 +48,7 @@ class Datos(db.Model):
         self.Seats = Seats
         self.New_Price = New_Price
         self.Price = Price
+        self.Estado = estado
 
     @property
     def obtenerDatos(self):
@@ -64,4 +67,5 @@ class Datos(db.Model):
             "Seats": self.Seats,
             "New_Price": self.New_Price,
             "Price": self.Price,
+            "Estado": self.Estado
         }
