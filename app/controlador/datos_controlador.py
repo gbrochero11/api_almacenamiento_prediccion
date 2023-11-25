@@ -13,21 +13,10 @@ def obtener_Datos():
         return jsonify(status= False, msg=str(e))
 
 
-def agregar_estado_activo():
-    try:
-        lista_Datos = [dato for dato in datos_modelo.query.all()]
-        for dato in lista_Datos:
-            dato.Estado = "activo"
-        db.session.commit()
-        return jsonify(status=True, msg="Se han actualizado los estados.")
-    except Exception as e:
-        return jsonify(status= False, msg=str(e))
-
-
 def obtener_dato_by_ID(datos_ID):
     try:
         # Traer el registro según el id dado
-        dato = datos_modelo.query.filter_by(DatosID=datos_ID).first()
+        dato = datos_modelo.query.filter_by(Customer_ID=datos_ID).first()
         # si está vacio enviar mensaje
         if dato is None:
             return jsonify(status=False, msg="No se encontraron Datos.")
@@ -46,30 +35,34 @@ def agregar_Datos(datos):
 
 def actualizar_datos(dato_ID, datos):
     try:
-        old_datos = datos_modelo.query.filter_by(DatosID=dato_ID).first()
-
-        old_datos.Name = datos.Name
-        old_datos.Location = datos.Location
-        old_datos.Year = datos.Year
-        old_datos.Kilometers_Driven = datos.Kilometers_Driven
-        old_datos.Fuel_Type = datos.Fuel_Type
-        old_datos.Transmission = datos.Transmission
-        old_datos.Owner_Type = datos.Owner_Type
-        old_datos.Mileage = datos.Mileage
-        old_datos.Engine = datos.Engine
-        old_datos.Power = datos.Power
-        old_datos.Seats = datos.Seats
-        old_datos.New_Price = datos.New_Price
-        old_datos.Price = datos.Price
-
+        old_datos = datos_modelo.query.filter_by(Customer_ID=dato_ID).first()
+        old_datos.Age = datos.Age 
+        old_datos.Gender = datos.Gender 
+        old_datos.Item_Purchased = datos.Item_Purchased 
+        old_datos.Category = datos.Category 
+        old_datos.Purchase_Amount = datos.Purchase_Amount 
+        old_datos.Location = datos.Location 
+        old_datos.Size = datos.Size 
+        old_datos.Color = datos.Color 
+        old_datos.Season = datos.Season 
+        old_datos.Review_Rating = datos.Review_Rating 
+        old_datos.Subscription_Status = datos.Subscription_Status 
+        old_datos.Payment_Method = datos.Payment_Method 
+        old_datos.Shipping_Type = datos.Shipping_Type 
+        old_datos.Discount_Applied = datos.Discount_Applied 
+        old_datos.Promo_Code_Used = datos.Promo_Code_Used 
+        old_datos.Previous_Purchases = datos.Previous_Purchases 
+        old_datos.Preferred_Payment_Method = datos.Preferred_Payment_Method 
+        old_datos.Frequency_of_Purchases = datos.Frequency_of_Purchases 
+        old_datos.Estado = datos.Estado 
         db.session.commit()
         return jsonify(status=True, msg='Se ha actualizado el Dato.')
     except Exception as e:
         return jsonify(status=False, msg=str(e))
 
-def eliminar_dato(datos):
+def eliminar_dato(dato_ID,datos):
     try:
-        old_datos = datos_modelo.query.filter_by(DatosID=datos.DatosID).first()
+        old_datos = datos_modelo.query.filter_by(Customer_ID=dato_ID).first()
 
         old_datos.Estado = 'desactivado'
         db.session.commit()

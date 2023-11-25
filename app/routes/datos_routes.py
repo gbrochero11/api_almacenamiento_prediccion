@@ -16,10 +16,10 @@ def managerDatos(data_ID = None):
     try:
         if data_ID == None:
             if request.method == 'GET':
-                return datos_controlador.agregar_estado_activo()
+                return datos_controlador.obtener_Datos()
             if request.method == 'DELETE':
-                datoID = request.json['DatosID'] 
-                return datos_controlador.eliminar_dato(datoID) 
+                datoID = request.json['Customer_ID'] 
+                return datos_controlador.eliminar_dato(datoID, datoID) 
 
             datos = datos_modelo(
                 request.json["Age"],
@@ -47,7 +47,7 @@ def managerDatos(data_ID = None):
                 return datos_controlador.agregar_Datos(datos)
 
             if request.method == 'PUT':
-                datoID = request.json['DatosID']
+                datoID = request.json['Customer_ID']
                 return datos_controlador.actualizar_datos(datoID, datos)
 
         if data_ID is not None:
