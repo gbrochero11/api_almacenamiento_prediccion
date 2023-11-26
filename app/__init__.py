@@ -13,9 +13,6 @@ app.secret_key = 'secret_key'
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_CONNECTION_URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-db.init_app(app)
-with app.app_context():
-    db.create_all()
 
 # Configurando/registrando rutas
 from app.routes import usuarios_routes, datos_routes
