@@ -46,3 +46,4 @@ wsproto
 zope.event
 zope.interface
 Gunicorn
+psycopg2
