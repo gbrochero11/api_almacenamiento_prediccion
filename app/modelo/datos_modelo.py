@@ -1,4 +1,6 @@
 from app.utils.db import db
+from sqlalchemy.dialects.postgresql import psycopg2
+
 
 
 class Datos(db.Model):

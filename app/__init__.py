@@ -2,6 +2,8 @@ from app.config import DATABASE_CONNECTION_URI
 from flask import Flask, jsonify
 from flask_cors import CORS
 from app.utils.db import db
+from sqlalchemy.dialects.postgresql import psycopg2
+
 
 app = Flask(__name__)
 CORS(app,  origins="*", supports_credentials=True)

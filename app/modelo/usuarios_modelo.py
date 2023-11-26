@@ -1,4 +1,6 @@
 from app.utils.db import db
+from sqlalchemy.dialects.postgresql import psycopg2
+
 
 class Usuario(db.Model):
     UserID = db.Column(db.Integer, primary_key=True, autoincrement=True)
