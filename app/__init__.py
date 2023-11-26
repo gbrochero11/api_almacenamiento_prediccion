@@ -1,7 +1,7 @@
 from app.config import DATABASE_CONNECTION_URI
 from flask import Flask, jsonify
 from flask_cors import CORS
-from utils.db import db
+from app.utils.db import db
 
 app = Flask(__name__)
 CORS(app,  origins="*", supports_credentials=True)
