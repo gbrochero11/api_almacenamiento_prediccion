@@ -21,7 +21,6 @@ itsdangerous
 Jinja2
 MarkupSafe
 mysql-connector-python
-mysqlclient
 outcome
 packaging
 protobuf
